@@ -1,5 +1,9 @@
 package com.kru13.httpserver;
 
+import android.os.Environment;
+import android.os.Handler;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,47 +17,25 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import android.os.Environment;
-import android.os.Handler;
-import android.util.Log;
-
 import static android.icu.lang.UCharacter.WordBreak.NEWLINE;
 
-public class SocketServer extends Thread {
-	
+public class ServerHandler extends Thread {
+
 	ServerSocket serverSocket;
-	ServerHandler handler;
-	public final int port = 12345;
-	boolean bRunning;
-	
-	public void close() {
-		try {
-			serverSocket.close();
-		} catch (IOException e) {
-			Log.d("SERVER", "Error, probably interrupted in accept(), see log");
-			e.printStackTrace();
-		}
-		bRunning = false;
-	}
-	
-	public void run() {
-        Log.d("SERVER", "Creating Socket");
-        try {
-            serverSocket = new ServerSocket(port);
-            handler = new ServerHandler(serverSocket);
-            handler.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+	public ServerHandler(ServerSocket serverSocket){
+	    this.serverSocket = serverSocket;
     }
 
-    private void serverHandler(){
+	public void run() {
         boolean bRunning;
         try {
             bRunning = true;
             while (bRunning) {
                 Log.d("SERVER", "Socket Waiting for connection");
                 Socket s = serverSocket.accept();
+
+                (new ServerHandler(serverSocket)).start();
 
                 Log.d("SERVER", "Socket Accepted");
 
@@ -154,4 +136,5 @@ public class SocketServer extends Thread {
             bRunning = false;
         }
     }
+
 }
