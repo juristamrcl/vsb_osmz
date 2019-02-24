@@ -1,0 +1,122 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:2:1-28:12
+MERGED from [com.android.support:appcompat-v7:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.1.0.aar\80d8c5865e644f50291f30421fa1f9e0\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:animated-vector-drawable:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.1.0.aar\9824b71b69185263c0e60d2f70a879df\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:support-vector-drawable:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.1.0.aar\bb7d7cf0687c0c2aae7702c90d234cb1\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:support-v4:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-v4-25.1.0.aar\da426ad6df5502cd5cae83570e0f22a8\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-fragment:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-fragment-25.1.0.aar\ab26ee4e77112c4339594b091a46d5d5\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-media-compat:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.1.0.aar\0b712034fca589ced28feea9a5db0ccc\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-core-utils:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.1.0.aar\3197cf053a97ae65bf4c8ec580608253\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-core-ui:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.1.0.aar\20139ab56e2914ba0f44f42be5e4a5a3\AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-compat:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-compat-25.1.0.aar\5e27df102f1c3ef7124bd7e7c9425771\AndroidManifest.xml:17:1-27:12
+INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:2:1-28:12
+	package
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:4:5-35
+		INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+		INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:6:5-30
+		INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+		INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:3:5-51
+	xmlns:android
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:5:5-28
+		INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+		INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:9:5-66
+	android:name
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:9:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:10:5-117
+	tools:remove
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:10:79-115
+	android:name
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:10:22-78
+application
+ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:12:5-26:19
+MERGED from [com.android.support:appcompat-v7:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.1.0.aar\80d8c5865e644f50291f30421fa1f9e0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.1.0.aar\80d8c5865e644f50291f30421fa1f9e0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.1.0.aar\9824b71b69185263c0e60d2f70a879df\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.1.0.aar\9824b71b69185263c0e60d2f70a879df\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.1.0.aar\bb7d7cf0687c0c2aae7702c90d234cb1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-vector-drawable:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.1.0.aar\bb7d7cf0687c0c2aae7702c90d234cb1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-v4:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-v4-25.1.0.aar\da426ad6df5502cd5cae83570e0f22a8\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-v4-25.1.0.aar\da426ad6df5502cd5cae83570e0f22a8\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-fragment-25.1.0.aar\ab26ee4e77112c4339594b091a46d5d5\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-fragment-25.1.0.aar\ab26ee4e77112c4339594b091a46d5d5\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.1.0.aar\0b712034fca589ced28feea9a5db0ccc\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.1.0.aar\0b712034fca589ced28feea9a5db0ccc\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.1.0.aar\3197cf053a97ae65bf4c8ec580608253\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.1.0.aar\3197cf053a97ae65bf4c8ec580608253\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.1.0.aar\20139ab56e2914ba0f44f42be5e4a5a3\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.1.0.aar\20139ab56e2914ba0f44f42be5e4a5a3\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-compat-25.1.0.aar\5e27df102f1c3ef7124bd7e7c9425771\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-compat-25.1.0.aar\5e27df102f1c3ef7124bd7e7c9425771\AndroidManifest.xml:25:5-20
+	android:label
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:15:9-41
+	android:icon
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:14:9-45
+	android:allowBackup
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:13:9-35
+	android:theme
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:16:9-40
+activity#com.kru13.httpserver.HttpServerActivity
+ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:17:9-25:20
+	android:label
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:19:13-45
+	android:name
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:18:13-67
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:20:13-24:29
+action#android.intent.action.MAIN
+ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:21:17-69
+	android:name
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:21:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:23:17-77
+	android:name
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml:23:27-74
+uses-sdk
+INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.1.0.aar\80d8c5865e644f50291f30421fa1f9e0\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.1.0.aar\80d8c5865e644f50291f30421fa1f9e0\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.1.0.aar\9824b71b69185263c0e60d2f70a879df\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.1.0.aar\9824b71b69185263c0e60d2f70a879df\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.1.0.aar\bb7d7cf0687c0c2aae7702c90d234cb1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-vector-drawable:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.1.0.aar\bb7d7cf0687c0c2aae7702c90d234cb1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-v4:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-v4-25.1.0.aar\da426ad6df5502cd5cae83570e0f22a8\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-v4-25.1.0.aar\da426ad6df5502cd5cae83570e0f22a8\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-fragment-25.1.0.aar\ab26ee4e77112c4339594b091a46d5d5\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-fragment:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-fragment-25.1.0.aar\ab26ee4e77112c4339594b091a46d5d5\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.1.0.aar\0b712034fca589ced28feea9a5db0ccc\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.1.0.aar\0b712034fca589ced28feea9a5db0ccc\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.1.0.aar\3197cf053a97ae65bf4c8ec580608253\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.1.0.aar\3197cf053a97ae65bf4c8ec580608253\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-ui:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.1.0.aar\20139ab56e2914ba0f44f42be5e4a5a3\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.1.0.aar\20139ab56e2914ba0f44f42be5e4a5a3\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-compat-25.1.0.aar\5e27df102f1c3ef7124bd7e7c9425771\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\support-compat-25.1.0.aar\5e27df102f1c3ef7124bd7e7c9425771\AndroidManifest.xml:21:5-23:58
+INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:25.1.0] C:\Users\Marcel Jurišta\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.1.0.aar\80d8c5865e644f50291f30421fa1f9e0\AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+		INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+		ADDED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml
+		INJECTED from C:\AndroidProjects\HTTPServer\app\src\main\AndroidManifest.xml

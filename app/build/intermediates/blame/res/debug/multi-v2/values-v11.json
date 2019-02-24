@@ -1,0 +1,44 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\AndroidProjects\\HTTPServer\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
+            "map": [
+                {
+                    "source": "C:\\AndroidProjects\\HTTPServer\\app\\src\\main\\res\\values-v11\\styles.xml",
+                    "from": {
+                        "startLines": "6",
+                        "startColumns": "4",
+                        "startOffsets": "177",
+                        "endLines": "8",
+                        "endColumns": "12",
+                        "endOffsets": "320"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "198"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Marcel Jurišta\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.1.0.aar\\80d8c5865e644f50291f30421fa1f9e0\\res\\values-v11\\values-v11.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
+                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "5,11,17,23,29,35,41,42,46,50,51,55,59,60,64,69,74,79,81,83,84,85,138,192",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "203,622,1047,1475,1901,2328,2753,2842,3088,3337,3438,3690,3945,4048,4301,4709,5129,5551,5658,5787,5858,5941,9818,13838",
+                        "endLines": "10,16,22,28,34,40,41,45,49,50,54,58,59,63,68,73,78,80,82,83,84,137,191,192",
+                        "endColumns": "12,12,12,12,12,12,88,12,12,100,12,12,102,12,12,12,12,12,12,70,82,12,12,90",
+                        "endOffsets": "617,1042,1470,1896,2323,2748,2837,3083,3332,3433,3685,3940,4043,4296,4704,5124,5546,5653,5782,5853,5936,9813,13833,13924"
+                    }
+                }
+            ]
+        }
+    ]
+}
