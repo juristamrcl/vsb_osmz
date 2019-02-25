@@ -1,14 +1,16 @@
 package com.kru13.httpserver;
 
+import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -17,14 +19,18 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import static android.icu.lang.UCharacter.WordBreak.NEWLINE;
+import static com.kru13.httpserver.SocketServer.sendMessage;
+
 
 public class ServerHandler extends Thread {
 
-	ServerSocket serverSocket;
+    public static String NEWLINE = "\r\n";
+	private ServerSocket serverSocket;
+	private Handler handler;
 
-	public ServerHandler(ServerSocket serverSocket){
+	public ServerHandler(ServerSocket serverSocket, Handler handler){
 	    this.serverSocket = serverSocket;
+	    this.handler = handler;
     }
 
 	public void run() {
@@ -33,9 +39,10 @@ public class ServerHandler extends Thread {
             bRunning = true;
             while (bRunning) {
                 Log.d("SERVER", "Socket Waiting for connection");
+
                 Socket s = serverSocket.accept();
 
-                (new ServerHandler(serverSocket)).start();
+                (new ServerHandler(serverSocket, handler)).start();
 
                 Log.d("SERVER", "Socket Accepted");
 
@@ -52,55 +59,69 @@ public class ServerHandler extends Thread {
                 }
                 if(!responses.isEmpty())
                 {
-                    String header[] = responses.get(0).split(" ");
-                    if (header[0].toUpperCase().equals("GET"))
+//                    for  (int i = 0; i < responses.size(); i++)
+//                    {
+//                        Log.d("SERVER1", i + ": " + responses.get(i));
+//                    }
+                    Log.d("SERVER", "out: " + responses.toString());
+                    String data[] = responses.get(0).split(" ");
+                    if (data[0].toUpperCase().equals("GET"))
                     {
                         Log.d("SERVER", "File exist");
 
-                        String fileName = header[1].substring(header[1].lastIndexOf("/")+1);
-                        File outFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),fileName);
+                        data[1] =  data[1].equals("/") ? "index.html" : data[1];
+
+                        File outFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), data[1]);
                         if (outFile.exists())
                         {
-                            BufferedReader outFileStream = new BufferedReader(new InputStreamReader(new FileInputStream(outFile)));
+                            out.write("HTTP/1.0 200 Ok" + NEWLINE);
+                            out.write("Date: " + Calendar.getInstance().getTime() + NEWLINE);
+                            out.write("Content-Length: " + String.valueOf(outFile.length()) + NEWLINE);
 
-                            out.write("HTTP/1.0 200 OK"+ NEWLINE);
-                            out.write("Date: "+ Calendar.getInstance().getTime()+ NEWLINE);
-                            out.write("Server: localhost/12345"+ NEWLINE);
-                            out.write("Content-Length: " + String.valueOf(outFile.length())+ NEWLINE);
-                            out.write("Connection: Closed"+ NEWLINE);
+                            sendMessage(handler, "Data returned successfully to <" +  responses.get(1).split(" ")[1] + ">");
+                            sendMessage(handler, "Requested url <" +  data[1] + ">");
+                            sendMessage(handler, "Total size <" +  String.valueOf(outFile.length()) + ">");
+
                             out.write(NEWLINE);
                             out.flush();
 
-
-//                            Log.d("SERVER","Size: " + fileLength);
-                            int fileLength = 0;
                             byte[] buf = new byte[1024];
-                            int len = 0;
+                            int len;
                             FileInputStream fis = new FileInputStream(outFile);
                             while ((len = fis.read(buf)) > 0){
                                 o.write(buf, 0, len);
                             }
 
-                            outFileStream.close();
                         }
                         else
                         {
-                            File notFoundFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),"notfound.html");
-//                            notFoundFile.createNewFile();
-                            BufferedReader outFileStream = new BufferedReader(new InputStreamReader(new FileInputStream(notFoundFile)));
 
-                            outFileStream.close();
-                            out.write(header[2] + " 404 Not Found"+ NEWLINE);
-                            out.write("Date: "+Calendar.getInstance().getTime()+ NEWLINE);
-                            out.write("Server: localhost/12345"+ NEWLINE);
+                            String[] folders = data[1].split("/");
+                            Log.d("SERVER", folders[1]);
+
+                            File notFoundFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),"notfound.html");
+                            for (int i = 0; i < folders.length - 1; i++){
+                                String tmp = "/";
+                                for (int j = 0; j < i; j++) {
+                                    tmp.concat(folders[j].concat("/"));
+                                }
+                                File toMakeFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), tmp);
+
+                                toMakeFile.mkdirs();
+                            }
+                            File toMakeFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), data[1]);
+                            toMakeFile.createNewFile();
+
+                            out.write("HTTP/1.0 404 Not Found"+ NEWLINE);
+                            out.write("Date: " + Calendar.getInstance().getTime()+ NEWLINE);
                             out.write("Content-Length: " + String.valueOf(notFoundFile.length()) + NEWLINE);
+                            out.write("Content-Type: text/html" + NEWLINE);
                             out.write("Connection: Closed"+ NEWLINE);
-                            out.write("Content-Type: text/html"+ NEWLINE);
                             out.write(NEWLINE);
                             out.flush();
 
                             byte[] buf = new byte[1024];
-                            int len = 0;
+                            int len;
                             FileInputStream fis = new FileInputStream(notFoundFile);
                             while ((len = fis.read(buf)) > 0){
                                 o.write(buf, 0, len);
@@ -108,11 +129,6 @@ public class ServerHandler extends Thread {
 
                             Log.d("SERVER","File not found");
                         }
-                    }
-                    else if(header[0].toUpperCase().equals("PUT"))
-                    {
-                        Log.d("SERVER","Put methode");
-
                     }
                     else
                     {
@@ -123,11 +139,14 @@ public class ServerHandler extends Thread {
                 s.close();
                 Log.d("SERVER", "Socket Closed");}
         }
-        catch (IOException e) {
-            if (serverSocket != null && serverSocket.isClosed())
+        catch (Exception e) {
+            e.printStackTrace();
+            if (serverSocket != null && serverSocket.isClosed()){
                 Log.d("SERVER", "Normal exit");
+            }
             else {
                 Log.d("SERVER", "Error");
+                sendMessage(handler, "Socket server error occured");
                 e.printStackTrace();
             }
         }

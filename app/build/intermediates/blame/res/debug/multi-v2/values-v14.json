@@ -4,19 +4,22 @@
             "outputFile": "C:\\AndroidProjects\\HTTPServer\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v14\\values-v14.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Marcel Jurišta\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.1.0.aar\\80d8c5865e644f50291f30421fa1f9e0\\res\\values-v14\\values-v14.xml",
+                    "source": "C:\\Users\\Marcel Jurišta\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\45e07f567be9c62ef8a8f74e5db61aae\\res\\values-v14\\values-v14.xml",
                     "from": {
-                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
+                        "startLines": "2,7,8,9,15",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,331,402,485,895",
+                        "endLines": "6,7,8,14,20",
+                        "endColumns": "12,70,82,12,12",
+                        "endOffsets": "326,397,480,890,1312"
                     },
                     "to": {
-                        "startLines": "5,10,11,12,18,24,25,26,27,28,31,32",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "203,479,550,633,1043,1465,1585,1717,1837,1900,2054,2117",
-                        "endLines": "9,10,11,17,23,24,25,26,27,30,31,32",
-                        "endColumns": "12,70,82,12,12,119,131,119,62,12,62,131",
-                        "endOffsets": "474,545,628,1038,1460,1580,1712,1832,1895,2049,2112,2244"
+                        "startLines": "5,10,11,12,18",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "203,479,550,633,1043",
+                        "endLines": "9,10,11,17,23",
+                        "endColumns": "12,70,82,12,12",
+                        "endOffsets": "474,545,628,1038,1460"
                     }
                 },
                 {

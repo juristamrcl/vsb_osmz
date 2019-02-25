@@ -3,21 +3,32 @@ package com.kru13.httpserver;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.app.Activity;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 
 public class HttpServerActivity extends AppCompatActivity implements OnClickListener{
 
+	public static String MESSAGE_STATUS = "MSG_STATUS";
+
 	private SocketServer s;
-	
+	public static Handler handler;
+	RecyclerView mStatusRecyclerView;
+	StatusRecyclerAdapter mStatusAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +55,27 @@ public class HttpServerActivity extends AppCompatActivity implements OnClickList
 
 			}
 		}
+
+		mStatusRecyclerView = findViewById(R.id.status_recycler);
+		LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+
+		mStatusRecyclerView.setLayoutManager(mLayoutManager);
+
+		mStatusAdapter = new StatusRecyclerAdapter(this, new ArrayList());
+		mStatusRecyclerView.setAdapter(mStatusAdapter);
+
+		handler = new Handler(){
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+
+				Bundle data = msg.getData();
+
+				String message = data.getString(MESSAGE_STATUS);
+
+				mStatusAdapter.insert(message);
+			}
+		};
     }
 
 
@@ -59,7 +91,7 @@ public class HttpServerActivity extends AppCompatActivity implements OnClickList
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if (v.getId() == R.id.button1) {
-			s = new SocketServer();
+			s = new SocketServer(handler);
 			s.start();
 		}
 		if (v.getId() == R.id.button2) {
