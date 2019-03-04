@@ -1,8 +1,11 @@
 package com.kru13.httpserver;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
@@ -10,15 +13,19 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 
-import org.json.JSONArray;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class HttpServerActivity extends AppCompatActivity implements OnClickListener{
 
@@ -26,14 +33,46 @@ public class HttpServerActivity extends AppCompatActivity implements OnClickList
 
 	private SocketServer s;
 	public static Handler handler;
-	RecyclerView mStatusRecyclerView;
-	StatusRecyclerAdapter mStatusAdapter;
+	private RecyclerView mStatusRecyclerView;
+	private StatusRecyclerAdapter mStatusAdapter;
+	private Camera camera;
+	private CameraPreview cameraPreview;
+	private byte[] picture;
+
+	public byte[] getPicture() {
+		return picture;
+	}
+
+	private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
+
+		@Override
+		public void onPictureTaken(byte[] data, Camera camera) {
+
+			picture = data;
+//			File pictureFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),"img.png");
+//			if (pictureFile == null){
+//				Log.d("ServerActivity1", "Error creating media file, check storage permissions");
+//				return;
+//			}
+//
+//			try {
+//				FileOutputStream fos = new FileOutputStream(pictureFile);
+//				fos.write(data);
+//				fos.close();
+//			} catch (FileNotFoundException e) {
+//				Log.d("ServerActivity1", "File not found: " + e.getMessage());
+//			} catch (IOException e) {
+//				Log.d("ServerActivity1", "Error accessing file: " + e.getMessage());
+//			}
+			camera.startPreview();
+		}
+	};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_http_server);
-        
+
         Button btn1 = (Button)findViewById(R.id.button1);
         Button btn2 = (Button)findViewById(R.id.button2);
          
@@ -56,6 +95,8 @@ public class HttpServerActivity extends AppCompatActivity implements OnClickList
 			}
 		}
 
+		checkCameraHardware(this);
+
 		mStatusRecyclerView = findViewById(R.id.status_recycler);
 		LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
 
@@ -76,6 +117,14 @@ public class HttpServerActivity extends AppCompatActivity implements OnClickList
 				mStatusAdapter.insert(message);
 			}
 		};
+
+		camera = getCameraInstance();
+		Log.d("ServerActivity","have camera? " + (camera != null));
+		cameraPreview = new CameraPreview(this, camera, mPicture);
+		FrameLayout preview = findViewById(R.id.camera_preview);
+		preview.addView(cameraPreview);
+
+		takePicture();
     }
 
 
@@ -91,7 +140,7 @@ public class HttpServerActivity extends AppCompatActivity implements OnClickList
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if (v.getId() == R.id.button1) {
-			s = new SocketServer(handler);
+			s = new SocketServer(handler, this);
 			s.start();
 		}
 		if (v.getId() == R.id.button2) {
@@ -102,6 +151,55 @@ public class HttpServerActivity extends AppCompatActivity implements OnClickList
 				e.printStackTrace();
 			}
 		}
+	}
+
+    private boolean checkCameraHardware(Context context) {
+//        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+//			Log.d("ServerActivity", "Has camera");
+//            return true;
+//        } else {
+//			Log.d("ServerActivity", "Does not have camera");
+//            return false;
+//        }
+
+		if (ContextCompat.checkSelfPermission(this,
+				Manifest.permission.CAMERA)
+				!= PackageManager.PERMISSION_GRANTED) {
+
+			if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+					Manifest.permission.CAMERA)) {
+
+			} else {
+				// No explanation needed; request the permission
+				ActivityCompat.requestPermissions(this,
+						new String[]{Manifest.permission.CAMERA},
+						1);
+
+			}
+		}
+		return true;
+    }
+
+    public static Camera getCameraInstance(){
+        Camera c = null;
+        try {
+            c = Camera.open(); // attempt to get a Camera instance
+        }
+        catch (Exception e){
+            // Camera is not available (in use or does not exist)
+        }
+        return c; // returns null if camera is unavailable
+    }
+
+    public void takePicture(){
+    	camera.takePicture(null, null, mPicture);
+
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				takePicture();
+			}
+		}, 200);
 	}
     
 }

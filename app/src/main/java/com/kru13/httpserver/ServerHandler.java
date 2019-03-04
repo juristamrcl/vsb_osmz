@@ -27,10 +27,12 @@ public class ServerHandler extends Thread {
     public static String NEWLINE = "\r\n";
 	private ServerSocket serverSocket;
 	private Handler handler;
+	private HttpServerActivity activity;
 
-	public ServerHandler(ServerSocket serverSocket, Handler handler){
+	public ServerHandler(ServerSocket serverSocket, Handler handler, HttpServerActivity activity){
 	    this.serverSocket = serverSocket;
 	    this.handler = handler;
+	    this.activity = activity;
     }
 
 	public void run() {
@@ -42,7 +44,7 @@ public class ServerHandler extends Thread {
 
                 Socket s = serverSocket.accept();
 
-                (new ServerHandler(serverSocket, handler)).start();
+                (new ServerHandler(serverSocket, handler, activity)).start();
 
                 Log.d("SERVER", "Socket Accepted");
 
@@ -71,63 +73,79 @@ public class ServerHandler extends Thread {
 
                         data[1] =  data[1].equals("/") ? "index.html" : data[1];
 
-                        File outFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), data[1]);
-                        if (outFile.exists())
-                        {
+                        Log.d("Activ2", data[1]);
+                        // writing image async
+                        if(data[1].indexOf("/snapshot") != -1){
+                            data[1] = "/snapshot";
+                            Log.d("Activ2", "here");
                             out.write("HTTP/1.0 200 Ok" + NEWLINE);
                             out.write("Date: " + Calendar.getInstance().getTime() + NEWLINE);
-                            out.write("Content-Length: " + String.valueOf(outFile.length()) + NEWLINE);
-
-                            sendMessage(handler, "Data returned successfully to <" +  responses.get(1).split(" ")[1] + ">");
-                            sendMessage(handler, "Requested url <" +  data[1] + ">");
-                            sendMessage(handler, "Total size <" +  String.valueOf(outFile.length()) + ">");
+                            out.write("Content-Length: " + String.valueOf(activity.getPicture().length) + NEWLINE);
 
                             out.write(NEWLINE);
                             out.flush();
 
-                            byte[] buf = new byte[1024];
-                            int len;
-                            FileInputStream fis = new FileInputStream(outFile);
-                            while ((len = fis.read(buf)) > 0){
-                                o.write(buf, 0, len);
-                            }
-
+                            o.write(activity.getPicture(), 0, activity.getPicture().length);
                         }
-                        else
-                        {
+                        else {
+                            File outFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), data[1]);
+                            if (outFile.exists())
+                            {
+                                out.write("HTTP/1.0 200 Ok" + NEWLINE);
+                                out.write("Date: " + Calendar.getInstance().getTime() + NEWLINE);
+                                out.write("Content-Length: " + String.valueOf(outFile.length()) + NEWLINE);
 
-                            String[] folders = data[1].split("/");
-                            Log.d("SERVER", folders[1]);
+                                sendMessage(handler, "Data returned successfully to <" +  responses.get(1).split(" ")[1] + ">");
+                                sendMessage(handler, "Requested url <" +  data[1] + ">");
+                                sendMessage(handler, "Total size <" +  String.valueOf(outFile.length()) + ">");
 
-                            File notFoundFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),"notfound.html");
-                            for (int i = 0; i < folders.length - 1; i++){
-                                String tmp = "/";
-                                for (int j = 0; j < i; j++) {
-                                    tmp.concat(folders[j].concat("/"));
+                                out.write(NEWLINE);
+                                out.flush();
+
+                                byte[] buf = new byte[1024];
+                                int len;
+                                FileInputStream fis = new FileInputStream(outFile);
+                                while ((len = fis.read(buf)) > 0){
+                                    o.write(buf, 0, len);
                                 }
-                                File toMakeFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), tmp);
 
-                                toMakeFile.mkdirs();
                             }
-                            File toMakeFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), data[1]);
-                            toMakeFile.createNewFile();
+                            else
+                            {
 
-                            out.write("HTTP/1.0 404 Not Found"+ NEWLINE);
-                            out.write("Date: " + Calendar.getInstance().getTime()+ NEWLINE);
-                            out.write("Content-Length: " + String.valueOf(notFoundFile.length()) + NEWLINE);
-                            out.write("Content-Type: text/html" + NEWLINE);
-                            out.write("Connection: Closed"+ NEWLINE);
-                            out.write(NEWLINE);
-                            out.flush();
+                                String[] folders = data[1].split("/");
+                                Log.d("SERVER", folders[1]);
 
-                            byte[] buf = new byte[1024];
-                            int len;
-                            FileInputStream fis = new FileInputStream(notFoundFile);
-                            while ((len = fis.read(buf)) > 0){
-                                o.write(buf, 0, len);
+                                File notFoundFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),"notfound.html");
+                                for (int i = 0; i < folders.length - 1; i++){
+                                    String tmp = "/";
+                                    for (int j = 0; j < i; j++) {
+                                        tmp.concat(folders[j].concat("/"));
+                                    }
+                                    File toMakeFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), tmp);
+
+                                    toMakeFile.mkdirs();
+                                }
+                                File toMakeFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), data[1]);
+                                toMakeFile.createNewFile();
+
+                                out.write("HTTP/1.0 404 Not Found"+ NEWLINE);
+                                out.write("Date: " + Calendar.getInstance().getTime()+ NEWLINE);
+                                out.write("Content-Length: " + String.valueOf(notFoundFile.length()) + NEWLINE);
+                                out.write("Content-Type: text/html" + NEWLINE);
+                                out.write("Connection: Closed"+ NEWLINE);
+                                out.write(NEWLINE);
+                                out.flush();
+
+                                byte[] buf = new byte[1024];
+                                int len;
+                                FileInputStream fis = new FileInputStream(notFoundFile);
+                                while ((len = fis.read(buf)) > 0){
+                                    o.write(buf, 0, len);
+                                }
+
+                                Log.d("SERVER","File not found");
                             }
-
-                            Log.d("SERVER","File not found");
                         }
                     }
                     else

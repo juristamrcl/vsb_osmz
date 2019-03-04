@@ -44,10 +44,17 @@
         android:layout_marginBottom="10dp"
         android:background="@android:color/darker_gray"/>
 
+    <FrameLayout
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_weight="1"
+        />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/status_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:divider="@android:color/transparent">
 
     </android.support.v7.widget.RecyclerView>

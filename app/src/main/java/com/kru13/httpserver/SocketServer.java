@@ -13,11 +13,13 @@ public class SocketServer extends Thread {
 	
 	private ServerSocket serverSocket;
 	private ServerHandler serverHandler;
+	private HttpServerActivity activity;
 	private Handler handler;
     private final int port = 12345;
 
-	public SocketServer(Handler handler){
+	public SocketServer(Handler handler, HttpServerActivity activity){
 	    this.handler = handler;
+	    this.activity = activity;
     }
 
 	public void close() {
@@ -37,7 +39,7 @@ public class SocketServer extends Thread {
 
         try {
             serverSocket = new ServerSocket(port);
-            serverHandler = new ServerHandler(serverSocket, handler);
+            serverHandler = new ServerHandler(serverSocket, handler, activity);
             serverHandler.start();
 
             sendMessage(handler, "Socket server connected");
