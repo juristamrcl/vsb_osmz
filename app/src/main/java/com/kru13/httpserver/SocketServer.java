@@ -2,7 +2,7 @@ package com.kru13.httpserver;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-import android.graphics.Color;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,10 +16,12 @@ public class SocketServer extends Thread {
 	private HttpServerActivity activity;
 	private Handler handler;
     private final int port = 12345;
+    private Camera camera;
 
-	public SocketServer(Handler handler, HttpServerActivity activity){
+	public SocketServer(Handler handler, HttpServerActivity activity, Camera camera){
 	    this.handler = handler;
 	    this.activity = activity;
+	    this.camera = camera;
     }
 
 	public void close() {

@@ -1,17 +1,21 @@
 package com.kru13.httpserver;
 
 import android.content.Context;
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import static android.content.ContentValues.TAG;
 
 /** A basic Camera preview class */
-public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
+public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback  {
     private SurfaceHolder mHolder;
     private Camera mCamera;
     private Camera.PictureCallback callback;
@@ -52,6 +56,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             return;
         }
 
+        Log.d(TAG, "ServerActivity setting surface");
         // stop preview before making changes
         try {
             mCamera.stopPreview();

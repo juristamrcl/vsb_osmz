@@ -3,11 +3,14 @@ package com.kru13.httpserver;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,10 +23,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 
@@ -49,29 +49,26 @@ public class HttpServerActivity extends AppCompatActivity implements OnClickList
 		public void onPictureTaken(byte[] data, Camera camera) {
 
 			picture = data;
-//			File pictureFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),"img.png");
-//			if (pictureFile == null){
-//				Log.d("ServerActivity1", "Error creating media file, check storage permissions");
-//				return;
-//			}
-//
-//			try {
-//				FileOutputStream fos = new FileOutputStream(pictureFile);
-//				fos.write(data);
-//				fos.close();
-//			} catch (FileNotFoundException e) {
-//				Log.d("ServerActivity1", "File not found: " + e.getMessage());
-//			} catch (IOException e) {
-//				Log.d("ServerActivity1", "Error accessing file: " + e.getMessage());
-//			}
 			camera.startPreview();
+		}
+	};
+	private Camera.PreviewCallback mPprev = new Camera.PreviewCallback() {
+
+		@Override
+		public void onPreviewFrame(byte[] bytes, Camera camera) {
+			picture = convertoToJpeg(bytes, camera);
 		}
 	};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_http_server);
+
+		StrictMode.ThreadPolicy policy = new
+				StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+
+		setContentView(R.layout.activity_http_server);
 
         Button btn1 = (Button)findViewById(R.id.button1);
         Button btn2 = (Button)findViewById(R.id.button2);
@@ -119,12 +116,13 @@ public class HttpServerActivity extends AppCompatActivity implements OnClickList
 		};
 
 		camera = getCameraInstance();
+		camera.setPreviewCallback(mPprev);
 		Log.d("ServerActivity","have camera? " + (camera != null));
 		cameraPreview = new CameraPreview(this, camera, mPicture);
 		FrameLayout preview = findViewById(R.id.camera_preview);
 		preview.addView(cameraPreview);
 
-		takePicture();
+		camera.startPreview();
     }
 
 
@@ -140,7 +138,7 @@ public class HttpServerActivity extends AppCompatActivity implements OnClickList
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if (v.getId() == R.id.button1) {
-			s = new SocketServer(handler, this);
+			s = new SocketServer(handler, this, camera);
 			s.start();
 		}
 		if (v.getId() == R.id.button2) {
@@ -188,10 +186,14 @@ public class HttpServerActivity extends AppCompatActivity implements OnClickList
         catch (Exception e){
             // Camera is not available (in use or does not exist)
         }
+		Log.d("ServerActivity","Get camera ? " + (c != null));
         return c; // returns null if camera is unavailable
     }
 
     public void takePicture(){
+    	if (camera == null)
+    		return;
+
     	camera.takePicture(null, null, mPicture);
 
 		handler.postDelayed(new Runnable() {
@@ -199,7 +201,18 @@ public class HttpServerActivity extends AppCompatActivity implements OnClickList
 			public void run() {
 				takePicture();
 			}
-		}, 200);
+		}, 500);
 	}
-    
+
+	public byte[] convertoToJpeg(byte[] data, Camera camera) {
+
+		YuvImage image = new YuvImage(data, ImageFormat.NV21,
+				camera.getParameters().getPreviewSize().width, camera.getParameters().getPreviewSize().height, null);
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		int quality = 20; //set quality
+		image.compressToJpeg(new Rect(0, 0, camera.getParameters().getPreviewSize().width, camera.getParameters().getPreviewSize().height), quality, baos);//this line decreases the image quality
+
+		return baos.toByteArray();
+	}
 }
